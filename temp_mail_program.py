@@ -1,5 +1,6 @@
 
 
+import time
 import requests
 
 def delete_user(user_id, jwt_token):
@@ -9,7 +10,18 @@ def delete_user(user_id, jwt_token):
 
     response = requests.delete(endpoint_url, headers=auth_headers)
 
-    return response.text
+    return response
+
+def retrieve_emails(jwt_token):
+
+    endpoint_url = "https://api.mail.tm/messages"
+    auth_headers = {"Authorization":f"Bearer {jwt_token}"}
+
+    response = requests.get(endpoint_url, headers=auth_headers)
+    json = response.json()
+
+    return json['hydra:member']
+
 
 def retrieve_token(email, password):
 
@@ -18,6 +30,8 @@ def retrieve_token(email, password):
 
     response = requests.post(endpoint_url, json = post_body)
     json = response.json()
+
+    print(json)
 
     return json['token']
 
@@ -28,7 +42,7 @@ def generate_user(domain):
 
     endpoint_url = "https://api.mail.tm/accounts"
 
-    post_body = {'address': f'titan225@{domain}', 'password':'pass123'}
+    post_body = {'address': f'titan229@{domain}', 'password':'pass123'}
 
     response = requests.post(endpoint_url, json=post_body)
     json = response.json()
@@ -46,18 +60,44 @@ def retrieve_domain():
 
 def main():
 
-    # domain = retrieve_domain()
-    # post_response = generate_user(domain)
-    # user_id = post_response['id'] #Use this when deleting the User
+    try:
+        print('Hello')
 
-    # print(f"Your Email ID is: f{post_response['address']}")
+        domain = retrieve_domain()
+        user_data = generate_user(domain)
+        print(user_data)
+        email_address = user_data['address']
+        password = 'pass123'
+        user_id = user_data['id']
 
-    # print(domain)
-    # print(post_response)
+        jwt_token = retrieve_token(email_address, password)
+        
 
-    #print(retrieve_token('titan225@karenkey.com', 'pass123'))
+        print(f'You email Address is: {email_address}')
+        print('Retrieving emails...')
 
-    print(delete_user('636538d5fc7a242b9506e611', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Njc1Nzg5NzMsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InRpdGFuMjI1QGthcmVua2V5LmNvbSIsImlkIjoiNjM2NTM4ZDVmYzdhMjQyYjk1MDZlNjExIiwibWVyY3VyZSI6eyJzdWJzY3JpYmUiOlsiL2FjY291bnRzLzYzNjUzOGQ1ZmM3YTI0MmI5NTA2ZTYxMSJdfX0.ant2Yc4Pv_WPI9pf-KGadgvLkVuQpNoWw1pFOZlSQXeyCIxry49a2QAQRSz5sge9mf44OThijZPGQpkCTsLEnw'))
+        while 1:
+
+            messages = retrieve_emails(jwt_token)
+
+            for message in messages:
+
+                sender_name = message['from']['name']
+                sender_email = message['from']['address']
+
+                print(f'Sent From: {sender_name}')
+                print(f'Their Email: {sender_email}')
+
+                print(f"{message['subject']}")
+                print(f"{message['intro']}")
+
+            
+            time.sleep(5)
+
+    except KeyboardInterrupt:
+
+        print(delete_user(user_id, jwt_token))
+        print('Keyboard Interrupt')
 
 
 

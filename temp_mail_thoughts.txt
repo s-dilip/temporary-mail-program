@@ -3,11 +3,12 @@ python3 temp_mail_program.py
 To DO
 [x] Fetch domain name
 [x] Generate a User
-[] Generate a random User name
 [x] Delete an account by id -> received when making post request
 [x] Retrieve JWT token
-[] Retrieve User emails
-[] Handle keyboard interrupt
+[x] Handle keyboard interrupt
+[x] Retrieve User emails
+[x] Delete the User upon exiting with keyboard interrupt
+[] Generate a random User name
 
 
 ----------------------------------
