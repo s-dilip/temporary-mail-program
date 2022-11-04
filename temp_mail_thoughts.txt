@@ -1,0 +1,9 @@
+python3 temp_mail_program.py
+
+To DO
+[]
+
+
+----------------------------------
+Keep in mind
+- API Base URL: https://api.mail.tm
