@@ -4,8 +4,10 @@ To DO
 [x] Fetch domain name
 [x] Generate a User
 [] Generate a random User name
-[] Delete an account by id -> received when making post request
+[x] Delete an account by id -> received when making post request
 [x] Retrieve JWT token
+[] Retrieve User emails
+[] Handle keyboard interrupt
 
 
 ----------------------------------

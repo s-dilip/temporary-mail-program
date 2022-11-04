@@ -2,6 +2,15 @@
 
 import requests
 
+def delete_user(user_id, jwt_token):
+
+    endpoint_url = f"https://api.mail.tm/accounts/{user_id}"
+    auth_headers = {"Authorization":f"Bearer {jwt_token}"}
+
+    response = requests.delete(endpoint_url, headers=auth_headers)
+
+    return response.text
+
 def retrieve_token(email, password):
 
     endpoint_url = "https://api.mail.tm/token"
@@ -46,7 +55,9 @@ def main():
     # print(domain)
     # print(post_response)
 
-    print(retrieve_token('titan225@karenkey.com', 'pass123'))
+    #print(retrieve_token('titan225@karenkey.com', 'pass123'))
+
+    print(delete_user('636538d5fc7a242b9506e611', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Njc1Nzg5NzMsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InRpdGFuMjI1QGthcmVua2V5LmNvbSIsImlkIjoiNjM2NTM4ZDVmYzdhMjQyYjk1MDZlNjExIiwibWVyY3VyZSI6eyJzdWJzY3JpYmUiOlsiL2FjY291bnRzLzYzNjUzOGQ1ZmM3YTI0MmI5NTA2ZTYxMSJdfX0.ant2Yc4Pv_WPI9pf-KGadgvLkVuQpNoWw1pFOZlSQXeyCIxry49a2QAQRSz5sge9mf44OThijZPGQpkCTsLEnw'))
 
 
 
