@@ -1,9 +1,16 @@
 python3 temp_mail_program.py
 
 To DO
-[]
+[x] Fetch domain name
+[] Generate a User
+[] Generate a random User name
 
 
 ----------------------------------
 Keep in mind
 - API Base URL: https://api.mail.tm
+
+
+----------------------------------
+Questions
+- 
