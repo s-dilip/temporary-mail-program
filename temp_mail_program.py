@@ -2,6 +2,16 @@
 
 import requests
 
+def retrieve_token(email, password):
+
+    endpoint_url = "https://api.mail.tm/token"
+    post_body = {'address': email, 'password':password}
+
+    response = requests.post(endpoint_url, json = post_body)
+    json = response.json()
+
+    return json['token']
+
 def generate_rand_email():
     a = 1
 
@@ -27,11 +37,18 @@ def retrieve_domain():
 
 def main():
 
-    domain = retrieve_domain()
-    post_response = generate_user(domain)
+    # domain = retrieve_domain()
+    # post_response = generate_user(domain)
+    # user_id = post_response['id'] #Use this when deleting the User
 
-    print(domain)
-    print(post_response)
+    # print(f"Your Email ID is: f{post_response['address']}")
+
+    # print(domain)
+    # print(post_response)
+
+    print(retrieve_token('titan225@karenkey.com', 'pass123'))
+
+
 
 main()
 

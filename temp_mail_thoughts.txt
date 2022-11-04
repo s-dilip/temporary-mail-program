@@ -5,12 +5,14 @@ To DO
 [x] Generate a User
 [] Generate a random User name
 [] Delete an account by id -> received when making post request
+[x] Retrieve JWT token
 
 
 ----------------------------------
 Keep in mind
 - API Base URL: https://api.mail.tm
 - Delete the User after being done with the service
+- If you want to read the response content and not just the code, first convert to json
 
 ----------------------------------
 Questions
