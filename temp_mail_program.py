@@ -1,7 +1,6 @@
-
-
 import time
 import requests
+import random
 
 def delete_user(user_id, jwt_token):
 
@@ -38,11 +37,12 @@ def retrieve_token(email, password):
 def generate_rand_email():
     a = 1
 
-def generate_user(domain):
+def generate_user(domain, password):
 
     endpoint_url = "https://api.mail.tm/accounts"
+    random_user_name= 'Hary' + str(random.randrange(1,999)) #Having 'Hary' is VERY IMPORTANT
 
-    post_body = {'address': f'titan229@{domain}', 'password':'pass123'}
+    post_body = {'address': f'{random_user_name}@{domain}', 'password':f'{password}'}
 
     response = requests.post(endpoint_url, json=post_body)
     json = response.json()
@@ -63,16 +63,17 @@ def main():
     try:
         print('Hello')
 
+        password = 'pass123'
+
         domain = retrieve_domain()
-        user_data = generate_user(domain)
+        user_data = generate_user(domain, password)
         print(user_data)
         email_address = user_data['address']
-        password = 'pass123'
+        
         user_id = user_data['id']
 
         jwt_token = retrieve_token(email_address, password)
         
-
         print(f'You email Address is: {email_address}')
         print('Retrieving emails...')
 
@@ -98,8 +99,6 @@ def main():
 
         print(delete_user(user_id, jwt_token))
         print('Keyboard Interrupt')
-
-
 
 main()
 
