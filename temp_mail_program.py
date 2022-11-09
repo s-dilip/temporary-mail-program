@@ -5,10 +5,6 @@ from flask import Flask, current_app, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def index():
-    return current_app.send_static_file("index.html")
-
 def delete_user(user_id, jwt_token):
 
     endpoint_url = f"https://api.mail.tm/accounts/{user_id}"
@@ -37,12 +33,7 @@ def retrieve_token(email, password):
     response = requests.post(endpoint_url, json = post_body)
     json = response.json()
 
-    print(json)
-
     return json['token']
-
-def generate_rand_email():
-    a = 1
 
 def generate_user(domain, password):
 
@@ -108,4 +99,19 @@ def main():
         print('Keyboard Interrupt')
 
 # main()
+
+password = 'pass123'
+domain = retrieve_domain()
+user_data = generate_user(domain, password)
+email_address = user_data['address']
+user_id = user_data['id']
+jwt_token = retrieve_token(email_address, password)
+
+@app.route("/", methods=["GET"])
+def index():
+
+    messages = retrieve_emails(jwt_token)
+
+    # return current_app.send_static_file("index.html")
+    return [f"Your Email: {email_address}",messages]
 
