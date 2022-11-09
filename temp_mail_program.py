@@ -112,6 +112,8 @@ def index():
 
     messages = retrieve_emails(jwt_token)
 
-    # return current_app.send_static_file("index.html")
-    return [f"Your Email: {email_address}",messages]
+    print(email_address)
+    return render_template("index.html", messages=messages)
+    # return [f"Your Email: {email_address}",messages]
+    
 

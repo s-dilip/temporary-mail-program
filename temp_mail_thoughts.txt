@@ -10,8 +10,8 @@ To DO
 [x] Retrieve User emails
 [x] Delete the User upon exiting with keyboard interrupt
 [x] Generate a random User name
-[] Render emails in a separate function
-[] Use rich to render emails nicely
+
+[] Display email in the frontend
 
 
 ----------------------------------

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    Mail Hary
+  </head>
+  <body>
+    <header>Welcome to Mail Hary Program</header>
+    <main>
+      <p>Emails displayed here</p>
+      <br />
+      {% for message in messages %}
+      <div>
+        <p>{{message['from']['name']}}</p>
+        <br />
+        <p>{{message['from']['address']}}</p>
+        <br />
+        <p>Message:</p>
+        <div>
+          <p>{{message['subject']}}</p>
+        </div>
+        <br />
+        <p>{{message['intro']}}</p>
+      </div>
+      <p>{{message['from']['name']}}</p>
+      {% endfor %}
+    </main>
+  </body>
+</html>
