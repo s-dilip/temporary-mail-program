@@ -1,4 +1,5 @@
 python3 temp_mail_program.py
+export FLASK_APP=temp_mail_program.py
 
 To DO
 [x] Fetch domain name
@@ -18,6 +19,7 @@ Keep in mind
 - API Base URL: https://api.mail.tm
 - Delete the User after being done with the service
 - If you want to read the response content and not just the code, first convert to json
+- In the virtual environment, install flask and requests
 
 ----------------------------------
 Questions

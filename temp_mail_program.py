@@ -1,6 +1,13 @@
 import time
 import requests
 import random
+from flask import Flask, current_app, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET"])
+def index():
+    return current_app.send_static_file("index.html")
 
 def delete_user(user_id, jwt_token):
 
@@ -67,7 +74,7 @@ def main():
 
         domain = retrieve_domain()
         user_data = generate_user(domain, password)
-        print(user_data)
+        # print(user_data)
         email_address = user_data['address']
         
         user_id = user_data['id']
@@ -100,5 +107,5 @@ def main():
         print(delete_user(user_id, jwt_token))
         print('Keyboard Interrupt')
 
-main()
+# main()
 
